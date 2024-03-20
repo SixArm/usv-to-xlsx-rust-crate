@@ -15,7 +15,7 @@ categories = ["command-line-utilities", "encoding", "data-structures", "parsing"
 [dependencies]
 
 # usv: Unicode Separated Values
-usv = "0.9.0"
+usv = "0.13.5"
 
 # rust_xlsxwriter: Rust Microsoft Excel XLSX writer for files, workbooks, worksheets, etc.
 rust_xlsxwriter = "0.63.0"

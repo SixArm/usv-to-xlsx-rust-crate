@@ -66,21 +66,19 @@ mod tests {
     
     #[test]
     fn usv_to_xlsx_files_test() {
-        let usv_file = "a␟b␟␞c␟d␟␞␝e␟f␟␞g␟h␟␞␝␜"; 
         let dir = std::env::temp_dir();
-        let path0 = dir.join("usv0.xlsx");
-        let path1 = dir.join("usv0.xlsx");
+        let path0 = dir.join("test1.xlsx");
+        let path1 = dir.join("test2.xlsx");
         let paths = vec![path0, path1];
-        usv_to_xlsx_files(usv_file, &paths).unwrap();
+        usv_to_xlsx_files(EXAMPLE_STYLE_CONTROLS_GROUPS, &paths).unwrap();
         //TODO test results
     }
 
      #[test]
     fn usv_to_xlsx_file_test() {
-        let usv_file = "a␟b␟␞c␟d␟␞␝e␟f␟␞g␟h␟␞␝␜"; 
         let dir = std::env::temp_dir();
-        let path = dir.join("usv.xlsx");
-        let mut workbook = usv_to_xlsx_file(usv_file, &path).unwrap();
+        let path = dir.join("test.xlsx");
+        let mut workbook = usv_to_xlsx_file(EXAMPLE_STYLE_CONTROLS_GROUPS, &path).unwrap();
         let worksheets: &Vec<Worksheet> = workbook.worksheets();
         assert_eq!(worksheets.len(), 2);
         //TODO test the inner data
@@ -88,8 +86,7 @@ mod tests {
   
     #[test]
     fn usv_to_xlsx_workbook_test() {
-        let usv_file = "a␟b␟␞c␟d␟␞␝e␟f␟␞g␟h␟␞␝␜"; 
-        let mut workbook = usv_to_xlsx_workbook(usv_file).unwrap();
+        let mut workbook = usv_to_xlsx_workbook(EXAMPLE_STYLE_CONTROLS_GROUPS).unwrap();
         let worksheets: &Vec<Worksheet> = workbook.worksheets();
         assert_eq!(worksheets.len(), 2);
         //TODO test the inner data
@@ -97,9 +94,7 @@ mod tests {
 
     #[test]
     fn usv_to_xlsx_worksheet_test() {
-        // Input is one USV group
-        let usv_group = "a␟b␟␞c␟d␟␞␝";
-        let mut _worksheet = usv_to_xlsx_worksheet(usv_group).unwrap();
+        let mut _worksheet = usv_to_xlsx_worksheet(EXAMPLE_STYLE_CONTROLS_RECORDS).unwrap();
         //TODO test the inner data
     }
 

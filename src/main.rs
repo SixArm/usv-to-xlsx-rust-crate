@@ -1,7 +1,7 @@
 //! # usv-to-xlsx
 //!
 //! Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv) to
-//! JavaScript Object Notation (XLSX).
+//! Microsoft Excel (XLSX).
 //!
 //! Syntax:
 //!

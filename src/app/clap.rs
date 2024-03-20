@@ -14,11 +14,20 @@ use clap::value_parser;
 use std::path::PathBuf;
 
 pub fn clap() -> crate::app::args::Args {
-    let matches = clap::command!()
+    let matches = matches();
+    crate::app::args::Args {
+        test: matches.get_flag("test"),
+        log_level: crate::app::log::u8_to_log_level(matches.get_count("verbose")),
+        output_paths: matches.get_occurrences::<PathBuf>("output").unwrap().map(Iterator::collect).collect(),
+    }
+}
+
+fn matches() -> clap::ArgMatches {
+    clap::command!()
     .name("usv-to-xlsx")
     .version("1.2.0")
     .author("Joel Parker Henderson <joel@joelparkerhenderson.com>")
-    .about("Convert Unicode Separated Values (USV) to JavaScript Object Notation (XLSX)")
+    .about("Convert Unicode Separated Values (USV) to Microsoft Excel (XLSX)")
     .arg(Arg::new("test")
         .help("Print test output for debugging, verifying, tracing, and the like.\nExample: --test")
         .long("test")
@@ -35,11 +44,5 @@ pub fn clap() -> crate::app::args::Args {
         .default_value("output.xlsx")
         .value_parser(value_parser!(std::ffi::OsString))
         .action(clap::ArgAction::Set))
-    .get_matches();
-    
-    crate::app::args::Args {
-        test: matches.get_flag("test"),
-        log_level: crate::app::log::u8_to_log_level(matches.get_count("verbose")),
-        output_paths: matches.get_occurrences::<PathBuf>("output").unwrap().map(Iterator::collect).collect(),
-    }
+    .get_matches()
 }

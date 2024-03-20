@@ -1,6 +1,7 @@
 # usv-to-xlsx
 
-Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv) to Microsoft Excel (XLSX).
+Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv) 
+to Microsoft Excel (XLSX).
 
 Syntax:
 
