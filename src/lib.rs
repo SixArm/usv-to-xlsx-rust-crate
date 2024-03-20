@@ -1,4 +1,9 @@
 use usv::*;
+use core::marker::Send;
+use std::io::{
+    Seek,
+    Write,
+};
 use std::path::{
     Path,
     PathBuf,
@@ -10,19 +15,19 @@ use rust_xlsxwriter::{
     XlsxError,
 };
 
-/// Convert each USV file to an Excel Workbook then save it.
-pub fn usv_to_xlsx_files(usv: &str, paths: &Vec<PathBuf/*TODO upgrade to AsRef */>) -> Result<(), XlsxError> {
-    for (i, file) in usv.files().enumerate() {
-        usv_to_xlsx_file(&file, &paths[i])?;
-    }
-    Ok(())
+/// Convert a USV file to an Excel Workbook then save iit to a file.
+pub fn usv_to_xlsx_file(usv: &str, path: &impl AsRef<Path>) -> Result<(), XlsxError> {
+    usv_to_xlsx_workbook(usv)?.save(path)
 }
 
-/// Convert a USV file to an Excel Workbook then save it.
-pub fn usv_to_xlsx_file(usv: &str, path: &impl AsRef<Path>) -> Result<Workbook, XlsxError> {
-    let mut workbook = usv_to_xlsx_workbook(usv)?;
-    workbook.save(path)?;
-    Ok(workbook)
+/// Convert a USV file to an Excel Workbook then return a buffer of bytes.
+pub fn usv_to_xlsx_buffer(usv: &str) -> Result<Vec<u8>, XlsxError> {
+    usv_to_xlsx_workbook(usv)?.save_to_buffer()
+}
+
+/// Convert a USV file to an Excel Workbook then write it to a given writer.
+pub fn usv_to_xlsx_writer<WRITER: Write + Seek + Send>(usv: &str, writer: WRITER) -> Result<(), XlsxError> {
+    usv_to_xlsx_workbook(usv)?.save_to_writer(writer)
 }
 
 /// Convert a USV file to an Excel Workbook.
@@ -40,8 +45,9 @@ pub fn usv_to_xlsx_workbook(usv: &str) -> Result<Workbook, XlsxError> {
 /// Example:
 /// 
 /// ```
+/// use usv_to_xlsx::*;
 /// let usv = "a␟b␟␞c␟d␟␞␝";
-/// let mut worksheet = usv_to_xlsx_worksheet(usv);
+/// let mut worksheet =  usv_to_xlsx_worksheet(usv);
 /// assert!(worksheet.is_ok())
 /// ```
 ///
@@ -63,38 +69,45 @@ pub fn usv_to_xlsx_worksheet(usv: &str) -> Result<Worksheet, XlsxError> {
 mod tests {
     use super::*;
     use std::path::PathBuf;
-    
-    #[test]
-    fn usv_to_xlsx_files_test() {
-        let dir = std::env::temp_dir();
-        let path0 = dir.join("test1.xlsx");
-        let path1 = dir.join("test2.xlsx");
-        let paths = vec![path0, path1];
-        usv_to_xlsx_files(EXAMPLE_STYLE_CONTROLS_GROUPS, &paths).unwrap();
-        //TODO test results
-    }
+    use once_cell::sync::Lazy;
+
+    pub static TESTS_DIR: Lazy<PathBuf> = Lazy::new(||
+        [env!("CARGO_MANIFEST_DIR"), "tests"].iter().collect::<PathBuf>()
+    );
+
+    pub static EXAMPLE_XLSX_GROUPS: Lazy<Vec<u8>> = Lazy::new(||
+        std::fs::read(&TESTS_DIR.join("common").join("example.xlsx")).expect("EXAMPLE_XLSX_GROUPS")
+    );
 
      #[test]
     fn usv_to_xlsx_file_test() {
+        let input = EXAMPLE_STYLE_CONTROLS_GROUPS;
         let dir = std::env::temp_dir();
         let path = dir.join("test.xlsx");
-        let mut workbook = usv_to_xlsx_file(EXAMPLE_STYLE_CONTROLS_GROUPS, &path).unwrap();
-        let worksheets: &Vec<Worksheet> = workbook.worksheets();
-        assert_eq!(worksheets.len(), 2);
-        //TODO test the inner data
+        usv_to_xlsx_file(input, &path).unwrap();
+        //TODO test the file
     }
-  
+
+    #[test]
+    fn usv_to_xlsx_buffer_test() {
+        let input = EXAMPLE_STYLE_CONTROLS_GROUPS;
+        let actual = usv_to_xlsx_buffer(input).unwrap();
+        //TODO test the buffer by doing an unzip and comparing files
+        //assert_eq!(actual, *EXAMPLE_XLSX_GROUPS);
+    }
+
     #[test]
     fn usv_to_xlsx_workbook_test() {
-        let mut workbook = usv_to_xlsx_workbook(EXAMPLE_STYLE_CONTROLS_GROUPS).unwrap();
-        let worksheets: &Vec<Worksheet> = workbook.worksheets();
-        assert_eq!(worksheets.len(), 2);
+        let input = EXAMPLE_STYLE_CONTROLS_GROUPS;
+        let mut workbook = usv_to_xlsx_workbook(input).unwrap();
+        assert_eq!((*workbook.worksheets()).len(), 2);
         //TODO test the inner data
     }
 
     #[test]
     fn usv_to_xlsx_worksheet_test() {
-        let mut _worksheet = usv_to_xlsx_worksheet(EXAMPLE_STYLE_CONTROLS_RECORDS).unwrap();
+        let input = EXAMPLE_STYLE_CONTROLS_GROUPS;
+        let mut _worksheet = usv_to_xlsx_worksheet(input).unwrap();
         //TODO test the inner data
     }
 

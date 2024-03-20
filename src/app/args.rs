@@ -5,7 +5,6 @@
 //! such as being able to start our app with other arg parsers.
 
 use std::default::Default;
-use std::path::PathBuf;
 
 #[derive(Debug)]
 pub struct Args {
@@ -18,10 +17,6 @@ pub struct Args {
     /// Example: 5 means print debug diagnostics.
     pub(crate) log_level: Option<::log::Level>,
 
-    /// Unit separator string.
-    /// Example: ","
-    pub(crate) output_paths: Vec<PathBuf>,
-
 }
 
 impl Default for Args {
@@ -29,7 +24,6 @@ impl Default for Args {
         Args {
             test: false,
             log_level: None,
-            output_paths: Vec::new(),
         }
     }
 }

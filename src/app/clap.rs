@@ -10,24 +10,21 @@
 //! rather than in `main.rs`, because we favor the separation of concerns.
 
 use clap::Arg;
-use clap::value_parser;
-use std::path::PathBuf;
 
 pub fn clap() -> crate::app::args::Args {
     let matches = matches();
     crate::app::args::Args {
         test: matches.get_flag("test"),
         log_level: crate::app::log::u8_to_log_level(matches.get_count("verbose")),
-        output_paths: matches.get_occurrences::<PathBuf>("output").unwrap().map(Iterator::collect).collect(),
     }
 }
 
 fn matches() -> clap::ArgMatches {
     clap::command!()
-    .name("usv-to-xlsx")
-    .version("1.2.0")
-    .author("Joel Parker Henderson <joel@joelparkerhenderson.com>")
-    .about("Convert Unicode Separated Values (USV) to Microsoft Excel (XLSX)")
+    .name(env!("CARGO_PKG_NAME"))
+    .version(env!("CARGO_PKG_VERSION"))
+    .author(env!("CARGO_PKG_AUTHORS"))
+    .about(env!("CARGO_PKG_DESCRIPTION"))
     .arg(Arg::new("test")
         .help("Print test output for debugging, verifying, tracing, and the like.\nExample: --test")
         .long("test")
@@ -37,12 +34,5 @@ fn matches() -> clap::ArgMatches {
         .short('v')
         .long("verbose")
         .action(clap::ArgAction::Count))
-    .arg(Arg::new("output")
-        .help("Set the output path")
-        .short('o')
-        .long("output")
-        .default_value("output.xlsx")
-        .value_parser(value_parser!(std::ffi::OsString))
-        .action(clap::ArgAction::Set))
     .get_matches()
 }

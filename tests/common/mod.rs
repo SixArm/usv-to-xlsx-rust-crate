@@ -37,7 +37,7 @@ pub static BENCHES_DIR: Lazy<PathBuf> = Lazy::new(||
 //
 ////
 
-pub const COMMAND: &str = "xlsx-to-usv";
+pub const COMMAND: &str = "usv-to-xlsx";
 
 #[allow(dead_code)]
 pub static COMMAND_FILE: Lazy<PathBuf> = Lazy::new(||

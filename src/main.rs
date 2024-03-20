@@ -33,9 +33,11 @@
 //!
 //! * -V, --version : Print version
 //!
-//! * -v, --verbose... : Set the verbosity level: 0=none, 1=error, 2=warn, 3=info, 4=debug, 5=trace. Example: --verbose …
+//! * -v, --verbose... : Set the verbosity level: 0=none, 1=error, 2=warn,
+//!   3=info, 4=debug, 5=trace. Example: --verbose …
 //!
-//! * --test : Print test output for debugging, verifying, tracing, and the like. Example: --test
+//! * --test : Print test output for debugging, verifying, tracing, and the
+//!   like. Example: --test
 //!
 //! ## Install
 //!
@@ -72,10 +74,9 @@
 //!
 //! Use this command when you want to convert from USV to XLSX.
 //!
-//! A typical use case is when you have USV data, such as a collection of units
-//! and
-//! records, and you want to convert it to XLSX data, such as for a spreadsheet
-//! import.
+//! A typical use case is when you have USV data, such as a collection of 
+//! units and records, and you want to convert it to XLSX data, such as for
+//! a spreadsheet import.
 //!
 //! Our real-world use case is converting a bunch of USV document-oriented data
 //! from a variety of programs, including a CMS, to USV so we're better-able to
@@ -101,9 +102,9 @@
 //! ## Tracking
 //!
 //! * Package: usv-to-xlsx-rust-crate
-//! * Version: 0.1.0
+//! * Version: 0.2.0
 //! * Created: 2024-03-09T13:33:20Z
-//! * Updated: 2024-03-18T15:42:57Z
+//! * Updated: 2024-03-20T23:08:44Z
 //! * License: MIT or Apache-2.0 or GPL-2.0 or GPL-3.0 or contact us for more
 //! * Contact: Joel Parker Henderson (joel@sixarm.com)
 
@@ -112,13 +113,14 @@
 extern crate log;
 extern crate env_logger;
 
-use std::io::{Read, stdin};
-
 pub mod app {
     pub mod args;
     pub mod clap;
     pub mod log;
 }
+
+use std::io::{Read, Write, self, stdin, stdout};
+
 
 fn main() -> std::io::Result<()> {
     let args: crate::app::args::Args = crate::app::clap::clap();
@@ -126,12 +128,12 @@ fn main() -> std::io::Result<()> {
     let mut stdin = stdin().lock();
     let mut s = String::new();
     stdin.read_to_string(&mut s)?;
-    match usv_to_xlsx::usv_to_xlsx_files(&s, &args.output_paths) {
-        Ok(()) => {
-            println!("Success.");
+    match usv_to_xlsx::usv_to_xlsx_buffer(&s) {
+        Ok(buffer) => {
+            stdout().write_all(&buffer)?
         },
         Err(e) => {
-            eprintln!("Application error: {e}");
+            eprintln!("{}", e);
             std::process::exit(1);
         }
     }
