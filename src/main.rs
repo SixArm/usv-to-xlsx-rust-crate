@@ -1,7 +1,7 @@
 //! # usv-to-xlsx
 //!
-//! Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv) to
-//! Microsoft Excel (XLSX).
+//! Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv)
+//! to Microsoft Excel (XLSX).
 //!
 //! Syntax:
 //!
@@ -15,17 +15,7 @@
 //! cat example.usv | usv-to-xlsx
 //! ```
 //!
-//! Example with output to a file:
-//!
-//! ```sh
-//! cat example.usv | usv-to-xlsx > example.xlsx
-//! ```
-//!
-//! Example with custom separators:
-//!
-//! ```sh
-//! cat example.usv | usv-to-xlsx --unit-separator ";" --record-separator "*"
-//! ```
+//! More examples below.
 //!
 //! ## Options
 //!
@@ -33,11 +23,9 @@
 //!
 //! * -V, --version : Print version
 //!
-//! * -v, --verbose... : Set the verbosity level: 0=none, 1=error, 2=warn,
-//!   3=info, 4=debug, 5=trace. Example: --verbose …
+//! * -v, --verbose... : Set the verbosity level: 0=none, 1=error, 2=warn, 3=info, 4=debug, 5=trace. Example: --verbose …
 //!
-//! * --test : Print test output for debugging, verifying, tracing, and the
-//!   like. Example: --test
+//! * --test : Print test output for debugging, verifying, tracing, and the like. Example: --test
 //!
 //! ## Install
 //!
@@ -47,8 +35,7 @@
 //! cargo install usv-to-xlsx
 //! ```
 //!
-//! Link:
-//! [https://crates.io/crates/usv-to-xlsx](https://crates.io/crates/usv-to-xlsx)
+//! Link: [https://crates.io/crates/usv-to-xlsx](https://crates.io/crates/usv-to-xlsx)
 //!
 //! ## Example
 //!
@@ -67,16 +54,15 @@
 //!
 //! You can now open the output file by using Microsoft Excel.
 //!
-//! ```
 //! ## FAQ
 //!
 //! ### When to use this command?
 //!
 //! Use this command when you want to convert from USV to XLSX.
 //!
-//! A typical use case is when you have USV data, such as a collection of 
-//! units and records, and you want to convert it to XLSX data, such as for
-//! a spreadsheet import.
+//! A typical use case is when you have USV data, such as a collection of units and
+//! records, and you want to convert it to XLSX data, such as for a spreadsheet
+//! import.
 //!
 //! Our real-world use case is converting a bunch of USV document-oriented data
 //! from a variety of programs, including a CMS, to USV so we're better-able to
@@ -102,9 +88,9 @@
 //! ## Tracking
 //!
 //! * Package: usv-to-xlsx-rust-crate
-//! * Version: 0.2.0
+//! * Version: 0.3.0
 //! * Created: 2024-03-09T13:33:20Z
-//! * Updated: 2024-03-20T23:08:44Z
+//! * Updated: 2024-03-25T16:39:44Z
 //! * License: MIT or Apache-2.0 or GPL-2.0 or GPL-3.0 or contact us for more
 //! * Contact: Joel Parker Henderson (joel@sixarm.com)
 

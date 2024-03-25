@@ -1,6 +1,6 @@
 # usv-to-xlsx
 
-Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv) 
+Convert [Unicode Separated Values (USV)](https://github.com/sixarm/usv)
 to Microsoft Excel (XLSX).
 
 Syntax:
@@ -15,12 +15,7 @@ Example:
 cat example.usv | usv-to-xlsx
 ```
 
-Example with output to a file:
-
-```sh
-cat example.usv | usv-to-xlsx > example.xlsx
-```
-
+More examples below.
 
 ## Options
 
@@ -32,7 +27,6 @@ cat example.usv | usv-to-xlsx > example.xlsx
 
 * --test : Print test output for debugging, verifying, tracing, and the like. Example: --test
 
-
 ## Install
 
 Install:
@@ -42,7 +36,6 @@ cargo install usv-to-xlsx
 ```
 
 Link: [https://crates.io/crates/usv-to-xlsx](https://crates.io/crates/usv-to-xlsx)
-
 
 ## Example
 
@@ -95,8 +88,8 @@ Constructive feedback welcome. Pull requests and feature requests welcome.
 ## Tracking
 
 * Package: usv-to-xlsx-rust-crate
-* Version: 0.2.0
+* Version: 0.3.0
 * Created: 2024-03-09T13:33:20Z
-* Updated: 2024-03-20T23:08:44Z
+* Updated: 2024-03-25T16:39:44Z
 * License: MIT or Apache-2.0 or GPL-2.0 or GPL-3.0 or contact us for more
 * Contact: Joel Parker Henderson (joel@sixarm.com)

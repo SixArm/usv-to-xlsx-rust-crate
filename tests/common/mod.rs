@@ -7,7 +7,7 @@ use std::path::Path;
 
 ////
 //
-// Paths that can simplify testing use cases. 
+// Paths that can simplify testing use cases.
 //
 ////
 
@@ -33,7 +33,7 @@ pub static BENCHES_DIR: Lazy<PathBuf> = Lazy::new(||
 
 ////
 //
-// Command locators that can simplify testing use cases. 
+// Command locators that can simplify testing use cases.
 //
 ////
 
