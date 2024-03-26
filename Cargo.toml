@@ -1,6 +1,6 @@
 [package]
 name = "usv-to-xlsx"
-version = "0.3.0"
+version = "0.3.1"
 edition = "2021"
 authors = ["Joel Parker Henderson <joel@joelparkerhenderson.com>"]
 description = "USV to XLSX: Convert Unicode Separated Values (USV) to Microsoft Excel (XLSX) for data markup, including for spreadsheets, databases, text files, and more."
@@ -15,7 +15,7 @@ categories = ["command-line-utilities", "encoding", "data-structures", "parsing"
 [dependencies]
 
 # usv: Unicode Separated Values
-usv = "0.14.0"
+usv = "0.15"
 
 # rust_xlsxwriter: Rust Microsoft Excel XLSX writer for files, workbooks, worksheets, etc.
 rust_xlsxwriter = "0.63.0"

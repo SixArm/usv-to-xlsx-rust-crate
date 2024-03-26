@@ -4,7 +4,7 @@ use std::process::Command;
 #[test]
 fn command() {
     let mut command = Command::new(&*COMMAND_OS);
-    let actual: Vec<u8> = command_io_str_to_bytes(&mut command, usv::examples::EXAMPLE_STYLE_SYMBOLS_GROUPS);
+    let actual: Vec<u8> = command_io_str_to_bytes(&mut command, usv::examples::EXAMPLE_GROUPS_STYLE_SYMBOLS);
     // TODO unzip and diff
     //
     // diff -r t1 t2

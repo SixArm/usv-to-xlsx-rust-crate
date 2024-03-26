@@ -184,7 +184,7 @@ mod tests {
 
      #[test]
     fn usv_to_xlsx_file_test() {
-        let input = EXAMPLE_STYLE_SYMBOLS_GROUPS;
+        let input = EXAMPLE_GROUPS_STYLE_SYMBOLS;
         let dir = std::env::temp_dir();
         let path = dir.join("test.xlsx");
         usv_to_xlsx_file(input, &path).unwrap();
@@ -193,7 +193,7 @@ mod tests {
 
     #[test]
     fn usv_to_xlsx_buffer_test() {
-        let input = EXAMPLE_STYLE_SYMBOLS_GROUPS;
+        let input = EXAMPLE_GROUPS_STYLE_SYMBOLS;
         let actual = usv_to_xlsx_buffer(input).unwrap();
         //TODO test the buffer by doing an unzip and comparing files
         //assert_eq!(actual, *EXAMPLE_XLSX_GROUPS);
@@ -201,7 +201,7 @@ mod tests {
 
     #[test]
     fn usv_to_xlsx_workbook_test() {
-        let input = EXAMPLE_STYLE_SYMBOLS_GROUPS;
+        let input = EXAMPLE_GROUPS_STYLE_SYMBOLS;
         let mut workbook = usv_to_xlsx_workbook(input).unwrap();
         assert_eq!((*workbook.worksheets()).len(), 2);
         //TODO test the inner data
@@ -209,21 +209,21 @@ mod tests {
 
     #[test]
     fn usv_to_xlsx_worksheet_test() {
-        let input = EXAMPLE_STYLE_SYMBOLS_GROUPS;
+        let input = EXAMPLE_GROUPS_STYLE_SYMBOLS;
         let mut _worksheet = usv_to_xlsx_worksheet(input).unwrap();
         //TODO test the inner data
     }
 
     #[test]
     fn usv_group_to_xlsx_worksheet_test() {
-        let input: usv::Group = EXAMPLE_STYLE_SYMBOLS_GROUP.groups().next().unwrap();
+        let input: usv::Group = EXAMPLE_GROUP_STYLE_SYMBOLS.groups().next().unwrap();
         let mut _worksheet = usv_group_to_xlsx_worksheet(&input).unwrap();
         //TODO test the inner data
     }
 
     #[test]
     fn usv_records_to_xlsx_worksheet_test() {
-        let input: usv::Records = EXAMPLE_STYLE_SYMBOLS_RECORDS.records().collect();
+        let input: usv::Records = EXAMPLE_RECORDS_STYLE_SYMBOLS.records().collect();
         let mut _worksheet = usv_records_to_xlsx_worksheet(&input).unwrap();
         //TODO test the inner data
     }
