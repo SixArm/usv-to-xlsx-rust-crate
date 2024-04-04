@@ -94,8 +94,8 @@ Constructive feedback welcome. Pull requests and feature requests welcome.
 ## Tracking
 
 * Package: usv-to-xlsx-rust-crate
-* Version: 0.3.2
+* Version: 0.4.0
 * Created: 2024-03-09T13:33:20Z
-* Updated: 2024-04-04T12:36:07Z
+* Updated: 2024-04-04T14:02:15Z
 * License: MIT or Apache-2.0 or GPL-2.0 or GPL-3.0 or contact us for more
 * Contact: Joel Parker Henderson (joel@sixarm.com)
