@@ -67,7 +67,7 @@ You can now open the output file by using Microsoft Excel.
 
 * [json-to-usv](https://crates.io/crates/json-to-usv) & [usv-to-json](https://crates.io/crates/usv-to-json)
 
-* [xlsx-to-usv](https://crates.io/crates/xlsx-to-usv) & [usv-to-asv](https://crates.io/crates/usv-to-xlsx)
+* [xlsx-to-usv](https://crates.io/crates/xlsx-to-usv) & [usv-to-xlsx](https://crates.io/crates/usv-to-xlsx)
 
 ### When to use this command?
 
@@ -103,8 +103,8 @@ Constructive feedback welcome. Pull requests and feature requests welcome.
 ## Tracking
 
 * Package: usv-to-xlsx-rust-crate
-* Version: 0.4.0
+* Version: 0.4.1
 * Created: 2024-03-09T13:33:20Z
-* Updated: 2024-04-04T14:02:15Z
+* Updated: 2024-04-11T19:55:29Z
 * License: MIT or Apache-2.0 or GPL-2.0 or GPL-3.0 or contact us for more
 * Contact: Joel Parker Henderson (joel@sixarm.com)
